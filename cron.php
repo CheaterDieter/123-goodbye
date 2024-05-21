@@ -13,9 +13,11 @@ require 'phpmailer/PHPMailer.php';
 /* SMTP-Klasse, die benötigt wird, um die Verbindung mit einem SMTP-Server herzustellen */
 require 'phpmailer/SMTP.php';
 
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
+
 
 $db = new SQLite3("data/priv/database.sqlite");
 $db->busyTimeout(5000);
@@ -32,8 +34,7 @@ while ($row_cron = $result_cron->fetchArray())
         print ($row_cron['id']);
         print (" ->");
         $email = base64_decode ($row_cron['email']);
-		print ("***");
-        // print ($email);
+        print ($email);
         print ("<br>");
         $cron_titel = base64_decode ($row_cron['title']);
         $filename="data/".uniqid().".pdf";
@@ -41,6 +42,9 @@ while ($row_cron = $result_cron->fetchArray())
         print ($_GET["pdf"]);
         $db-> exec ('UPDATE "fragen" SET "email"="" WHERE "id"="'.$row_cron['id'].'"');        
         
+        print ("<br>");
+        include ("createpdf.php");
+        print ("<br>");
         //Aufruf der Funktion, Versand von 1 Datei
         //Create an instance; passing `true` enables exceptions
         $mail = new PHPMailer(true);
@@ -48,7 +52,7 @@ while ($row_cron = $result_cron->fetchArray())
         try {
             //Server settings
             // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-			$mail->SMTPDebug  = SMTP::DEBUG_OFF; 
+			$mail->SMTPDebug = 0;                      //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = $mail_server;                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -81,7 +85,14 @@ while ($row_cron = $result_cron->fetchArray())
             
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }       
+        }
+        
+
+        
     }   
 }
+
+
+  
+
 ?>
