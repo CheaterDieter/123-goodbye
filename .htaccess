@@ -1,0 +1,11 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{QUERY_STRING} ^$
+RewriteRule ^(.*)/t /index.php?get=$1 [NC,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{QUERY_STRING} ^$
+RewriteRule ^(.*) /index.php?a=$1 [NC,L]
