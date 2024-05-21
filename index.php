@@ -1,5 +1,5 @@
 <?php
-$version = "V0.4-beta";
+$version = "V0.4.1-beta";
 
 if (file_exists("config.php") == FALSE) {
     die ("Konfigurationsdatei fehlt! Bitte die Datei config.sample.php mit eigenen Einstellungen anpassen und in config.php umbenennen.");
