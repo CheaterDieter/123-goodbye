@@ -1,5 +1,5 @@
 <?php
-$version = "V0.4.1-beta";
+$version = "V0.4.2-beta";
 
 if (file_exists("config.php") == FALSE) {
     die ("Konfigurationsdatei fehlt! Bitte die Datei config.sample.php mit eigenen Einstellungen anpassen und in config.php umbenennen.");
@@ -310,7 +310,7 @@ $url .= $_SERVER['HTTP_HOST'];
                     <form action="<?php echo ($url)."/?get=".$_GET["get"] ?>"  method="post">
                     <input class="text" type="password" id="pw" name="pw">
                     <input class="hide" type="text" id="get" name="get" value="<?php echo ($_GET["get"]); ?>">
-                        <input class="enter" type="submit" value="Goodbye erstellen">
+                        <input class="enter" type="submit" value="Lehreransicht öffnen">
                     </form>
                 <?php
                 }
